@@ -10,8 +10,8 @@ import com.programme.Views.View;
 
 public class Main {
     public static void main(String[] args) {
-        View vue = new View();
-        vue.init();
+//        View vue = new View();
+//        vue.init();
 
         Joueur joueur = new Joueur();
         joueur.setMessage("Je veux me connecter - JOUEUR 1");
