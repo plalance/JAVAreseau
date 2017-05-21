@@ -26,10 +26,12 @@ public class Handler extends Thread{
                 while ((line=reader.readLine()) != null){
                     System.out.println(line);
                 }
-                socket.close();
+                socket.shutdownInput();
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
+
+            System.out.println("Connexion terminée !");
     }
 }
