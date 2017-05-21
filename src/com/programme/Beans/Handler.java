@@ -16,10 +16,12 @@ public class Handler extends Thread{
         super();
         this.socket=socket;
     }
+
     public void run() {
         BufferedReader reader;
             try {
-                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                reader = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
                 String line = "";
                 while ((line=reader.readLine()) != null){
                     System.out.println(line);
@@ -29,7 +31,5 @@ public class Handler extends Thread{
             catch (IOException e) {
                 e.printStackTrace();
             }
-
-        System.out.println("Connexion établie...");
     }
 }

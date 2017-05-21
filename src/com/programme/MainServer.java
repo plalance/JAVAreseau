@@ -22,7 +22,4 @@ public class MainServer {
             e.printStackTrace();
         }
     }
-
-    public MainServer(){}
-
 }

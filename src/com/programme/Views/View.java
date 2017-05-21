@@ -10,6 +10,11 @@ public class View {
     JFrame frame;
     JTextField field;
     JButton button;
+    JButton buttonDeconnexion;
+
+    public JButton getButtonDeconnexion() {
+        return buttonDeconnexion;
+    }
 
     public JFrame getFrame() {
         return frame;
@@ -28,10 +33,12 @@ public class View {
         field = new JTextField();
         field.setColumns(10);
         button = new JButton("Envoyer");
+        buttonDeconnexion = new JButton("Se déconnecter");
 
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(field);
         frame.getContentPane().add(button);
+        frame.getContentPane().add(buttonDeconnexion);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 

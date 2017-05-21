@@ -9,21 +9,17 @@ import java.awt.event.ActionListener;
 /**
  * Created by Mol on 21/05/2017.
  */
-public class Controller implements ActionListener{
+public class DeconnexionController implements ActionListener{
 
     Joueur joueur;
-    JTextField field;
 
-    public Controller(Joueur joueur, JTextField field){
+    public DeconnexionController(Joueur joueur, JTextField field){
         this.joueur = joueur;
-        this.field = field;
-        this.joueur.createSocket();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.joueur.setMessage(field.getText());
-        this.joueur.causer(this.joueur.getMessage());
+       this.joueur.deconnexion();
     }
 
     public Joueur getJoueur() {
@@ -32,13 +28,5 @@ public class Controller implements ActionListener{
 
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
-    }
-
-    public JTextField getField() {
-        return field;
-    }
-
-    public void setField(JTextField field) {
-        this.field = field;
     }
 }

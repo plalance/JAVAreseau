@@ -2,6 +2,7 @@ package com.programme;
 
 import com.programme.Beans.Joueur;
 import com.programme.Controller.Controller;
+import com.programme.Controller.DeconnexionController;
 import com.programme.Views.View;
 
 /**
@@ -10,15 +11,14 @@ import com.programme.Views.View;
 
 public class Main {
     public static void main(String[] args) {
-//        View vue = new View();
-//        vue.init();
-
         Joueur joueur = new Joueur();
-        joueur.setMessage("Je veux me connecter - JOUEUR 1");
-        joueur.connexion();
 
-//        Controller controller = new Controller(joueur,vue.getField());
+        View vue = new View();
+        vue.init();
+        Controller controller = new Controller(joueur,vue.getField());
+        DeconnexionController decoController = new DeconnexionController(joueur,vue.getField());
 
-//        vue.getButton().addActionListener(controller);
+        vue.getButton().addActionListener(controller);
+        vue.getButtonDeconnexion().addActionListener(decoController);
     }
 }
