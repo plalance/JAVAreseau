@@ -11,7 +11,7 @@ public class MainServer {
         ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(6969);
-            System.out.println("ServeurMultiThread pret");
+            System.out.println("-----SERVER READY-----");
             boolean estActif = true;
             // boucle sur les connexions et demarrage d'un Thread
             while(estActif){
