@@ -1,6 +1,7 @@
 package com.programme;
 
 import com.programme.Beans.Handler;
+import com.programme.Beans.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,18 +9,6 @@ import java.net.ServerSocket;
 public class MainServer {
 
     public static void main(String[] args){
-        ServerSocket serverSocket;
-        try {
-            serverSocket = new ServerSocket(6969);
-            System.out.println("-----SERVER READY-----");
-            boolean estActif = true;
-            // boucle sur les connexions et demarrage d'un Thread
-            while(estActif){
-                new Handler(serverSocket.accept()).start();
-            }
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Server server = new Server(6969);
     }
 }
