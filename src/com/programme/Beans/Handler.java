@@ -29,10 +29,9 @@ public class Handler extends Thread {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-                writer.print("SERVEUR : Vous avez envoyé :"+line+"\n");
+                writer.println("SERVEUR : Vous avez envoyé :"+line);
                 writer.flush();
             }
-            socket.shutdownInput();
 
         } catch (IOException e) {
             e.printStackTrace();
