@@ -11,11 +11,11 @@ import java.util.Vector;
 /**
  * Created by Thibault on 12/04/2017.
  */
-public class Handler extends Thread {
+public class ServGuest extends Thread {
     private final Socket socket;
     private PrintWriter reponse;
 
-    public Handler(Socket socket) { //constructeur
+    public ServGuest(Socket socket) { //constructeur
         super();
         this.socket = socket;
     }
@@ -38,5 +38,9 @@ public class Handler extends Thread {
         }
 
         System.out.println("Connexion terminée !");
+    }
+
+    public void excludeGamer() throws IOException {
+        socket.close();
     }
 }
