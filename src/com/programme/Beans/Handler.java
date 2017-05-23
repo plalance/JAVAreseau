@@ -29,7 +29,7 @@ public class Handler extends Thread {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
                 reponse = new PrintWriter(this.socket.getOutputStream());
-                reponse.println("Vous avez envoyé :"+line);
+                reponse.println("SERVEUR : Vous avez envoyé :"+line+"\n");
                 reponse.flush();
             }
             socket.shutdownInput();
