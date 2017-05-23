@@ -28,9 +28,9 @@ public class Handler extends Thread {
             String line = "";
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
-                reponse = new PrintWriter(this.socket.getOutputStream());
-                reponse.println("SERVEUR : Vous avez envoyé :"+line+"\n");
-                reponse.flush();
+                PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+                writer.print("SERVEUR : Vous avez envoyé :"+line+"\n");
+                writer.flush();
             }
             socket.shutdownInput();
 
