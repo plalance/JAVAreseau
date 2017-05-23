@@ -53,12 +53,9 @@ public class Joueur{
             writer.print(message+"\n");
             writer.flush();
 
-            reponse = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-            String line = "";
-            while ((line = reponse.readLine()) != null) {
-                System.out.println(line);
-            }
+            this.reponse = new BufferedReader(
+                    new InputStreamReader(this.getSocket().getInputStream()));
+            System.out.println(this.reponse.readLine());
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
