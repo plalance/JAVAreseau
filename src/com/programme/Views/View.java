@@ -9,7 +9,9 @@ import java.awt.*;
 public class View {
     JFrame frame;
     JTextField field;
+    JTextField loginField;
     JButton button;
+    JButton loginButton;
     JButton buttonDeconnexion;
 
     public JButton getButtonDeconnexion() {
@@ -28,14 +30,27 @@ public class View {
         return button;
     }
 
+    public JTextField getLoginField() {
+        return loginField;
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
     public void init(){
         frame = new JFrame("Vue");
         field = new JTextField();
         field.setColumns(10);
+        loginField = new JTextField();
+        loginField.setColumns(10);
         button = new JButton("Envoyer");
+        loginButton = new JButton("Envoyer mon login");
         buttonDeconnexion = new JButton("Se déconnecter");
 
         frame.setLayout(new FlowLayout());
+        frame.getContentPane().add(loginField);
+        frame.getContentPane().add(loginButton);
         frame.getContentPane().add(field);
         frame.getContentPane().add(button);
         frame.getContentPane().add(buttonDeconnexion);

@@ -3,6 +3,7 @@ package com.programme;
 import com.programme.Beans.Joueur;
 import com.programme.Controller.Controller;
 import com.programme.Controller.DeconnexionController;
+import com.programme.Controller.LoginController;
 import com.programme.Views.View;
 
 /**
@@ -17,8 +18,10 @@ public class Main {
         vue.init();
         Controller controller = new Controller(joueur,vue.getField());
         DeconnexionController decoController = new DeconnexionController(joueur,vue.getField());
+        LoginController loginController = new LoginController(joueur, vue.getLoginField());
 
         vue.getButton().addActionListener(controller);
+        vue.getLoginButton().addActionListener(loginController);
         vue.getButtonDeconnexion().addActionListener(decoController);
     }
 }
