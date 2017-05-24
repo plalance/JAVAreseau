@@ -16,10 +16,12 @@ public class ServGuest extends Thread {
     private PrintWriter reponse;
     private Joueur joueur;
     private Boolean etat;
+    private Server server;
 
-    public ServGuest(Socket socket) { //constructeur
+    public ServGuest(Socket socket, Server server) { //constructeur
         super();
         this.socket = socket;
+        this.server = server;
     }
 
     public void run() {
@@ -32,7 +34,10 @@ public class ServGuest extends Thread {
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     if(line.equals("deco")){
-                        disconnectRequest();
+                        this.server.removeFromVector(this.joueur.getSocketRemoteAdress());
+//                        disconnectRequest();
+//                        System.out.println(this.server.getPort());
+//                        System.out.println(this.getJoueur().getSocketRemoteAdress());
                         this.etat = false;
                     }else {
                         System.out.println(line);
@@ -60,8 +65,10 @@ public class ServGuest extends Thread {
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
+//
+//    public void disconnectRequest(){
+//        this.server.removeFromVector(this.joueur.getSocket());
+//    }
 
-    public void disconnectRequest(){
-        Server.server.removeFromVector(this.joueur.getSocket());
-    }
+
 }

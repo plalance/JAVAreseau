@@ -14,8 +14,6 @@ public class Server {
     private Integer nbAmirals = 0;
     private Vector<Socket> socketsClient;
 
-    static Server server;
-
 
     public Server(Integer port){
         this.port = port;
@@ -42,12 +40,13 @@ public class Server {
                         joueur = new Joueur();
                         joueur.setSocketRemoteAdress(socketClient.getRemoteSocketAddress().toString());
 
-                        servGuest = new ServGuest(socketClient);
+                        servGuest = new ServGuest(socketClient, this);
                         servGuest.setJoueur(joueur);
                         servGuest.start();
 
                         this.socketsClient.add(socketClient);
                         System.out.println("Nouveau Client, adresse :"+joueur.getSocketRemoteAdress());
+                        System.out.println(this.getSocketsClient().toString());
                         this.nbJoueurs++;
                         break;
 //
@@ -63,10 +62,18 @@ public class Server {
                     default:
                         // Demande d'équipe que matelos
                         socketClient = serverSocket.accept();
-                        new ServGuest(socketClient).start();
+                        joueur = new Joueur();
+                        joueur.setSocketRemoteAdress(socketClient.getRemoteSocketAddress().toString());
+
+                        servGuest = new ServGuest(socketClient, this);
+                        servGuest.setJoueur(joueur);
+                        servGuest.start();
+
                         this.socketsClient.add(socketClient);
-                        System.out.println("Nouveau Client :"+socketClient.getRemoteSocketAddress());
+                        System.out.println("Nouveau Client, adresse :"+joueur.getSocketRemoteAdress());
+                        System.out.println(this.getSocketsClient().toString());
                         this.nbJoueurs++;
+                        break;
                 }
             }
 
@@ -106,9 +113,8 @@ public class Server {
         return socketsClient;
     }
 
-    public void removeFromVector(Socket socketaretirer){
-        this.socketsClient.remove(socketaretirer);
+    public void removeFromVector(String socketAdress){
+//        this.socketsClient.remove(socketJoueur);
+        System.out.println("socket a retirer :"+socketAdress+"\n");
     }
-
-
 }
