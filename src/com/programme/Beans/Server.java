@@ -20,6 +20,7 @@ public class Server {
 
     public void serverStart(){
         ServerSocket serverSocket;
+        socketsClient = new Vector<>();
         try {
             serverSocket = new ServerSocket(port);
             System.out.println("-----SERVER READY-----");
@@ -31,26 +32,29 @@ public class Server {
                 ServGuest serv;
                 Socket socketClient;
                 switch(this.nbJoueurs){
-                    case 0:
-                        socketClient = serverSocket.accept();
-                        new ServGuest(socketClient).start();
-                        socketsClient.add(socketClient);
-                        System.out.print(socketsClient.toString());
-                        this.nbJoueurs++;
-                        break;
-
-                    case 1:
-                        // Demande d'équipe
-                        serv = new ServGuest(serverSocket.accept());
-                        serv.start();
-                        serv.excludeGamer();
-
+//                    case 0:
+//                        socketClient = serverSocket.accept();
+//                        new ServGuest(socketClient).start();
+//                        this.socketsClient.add(socketClient);
+////                        System.out.print(socketsClient.toString());
 //                        this.nbJoueurs++;
-                        break;
+//                        break;
+//
+//                    case 1:
+//                        // Demande d'équipe
+//                        serv = new ServGuest(serverSocket.accept());
+//                        serv.start();
+//                        serv.excludeGamer();
+//
+////                        this.nbJoueurs++;
+//                        break;
 
                     default:
                         // Demande d'équipe que matelos
-                        new ServGuest(serverSocket.accept()).start();
+                        socketClient = serverSocket.accept();
+                        new ServGuest(socketClient).start();
+                        this.socketsClient.add(socketClient);
+                        System.out.println(socketsClient.toString());
                         this.nbJoueurs++;
                         break;
                 }
@@ -87,4 +91,13 @@ public class Server {
     public void setNbAmirals(Integer nbAmirals) {
         this.nbAmirals = nbAmirals;
     }
+
+    public Vector<Socket> getSocketsClient() {
+        return socketsClient;
+    }
+
+    public void setSocketsClient(Vector<Socket> socketsClient) {
+        this.socketsClient = socketsClient;
+    }
+
 }
