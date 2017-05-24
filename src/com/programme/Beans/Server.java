@@ -2,6 +2,8 @@ package com.programme.Beans;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Vector;
 
 /**
  * Created by Mol on 23/05/2017.
@@ -10,6 +12,7 @@ public class Server {
     private Integer port;
     private Integer nbJoueurs = 0;
     private Integer nbAmirals = 0;
+    private Vector<Socket> socketsClient;
 
     public Server(Integer port){
         this.port = port;
@@ -26,9 +29,13 @@ public class Server {
             // boucle sur les connexions et demarrage d'un Thread
             while(estActif){
                 ServGuest serv;
+                Socket socketClient;
                 switch(this.nbJoueurs){
                     case 0:
-                        new ServGuest(serverSocket.accept()).start();
+                        socketClient = serverSocket.accept();
+                        new ServGuest(socketClient).start();
+                        socketsClient.add(socketClient);
+                        System.out.print(socketsClient.toString());
                         this.nbJoueurs++;
                         break;
 
