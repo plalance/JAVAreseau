@@ -14,6 +14,7 @@ import java.util.Vector;
 public class ServGuest extends Thread {
     private final Socket socket;
     private PrintWriter reponse;
+    private Joueur joueur;
 
     public ServGuest(Socket socket) { //constructeur
         super();
@@ -42,5 +43,12 @@ public class ServGuest extends Thread {
 
     public void excludeGamer() throws IOException {
         socket.close();
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
     }
 }

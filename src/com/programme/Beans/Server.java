@@ -29,16 +29,25 @@ public class Server {
 
             // boucle sur les connexions et demarrage d'un Thread
             while(estActif){
-                ServGuest serv;
+                ServGuest servGuest;
                 Socket socketClient;
+                Joueur joueur;
+
                 switch(this.nbJoueurs){
-//                    case 0:
-//                        socketClient = serverSocket.accept();
-//                        new ServGuest(socketClient).start();
-//                        this.socketsClient.add(socketClient);
-////                        System.out.print(socketsClient.toString());
-//                        this.nbJoueurs++;
-//                        break;
+                    case 0:
+                        socketClient = serverSocket.accept();
+                        joueur = new Joueur();
+                        joueur.setLogin("toto");
+                        joueur.setSocketRemoteAdress(socketClient.getRemoteSocketAddress().toString());
+
+                        servGuest = new ServGuest(socketClient);
+                        servGuest.setJoueur(joueur);
+                        servGuest.start();
+
+                        this.socketsClient.add(socketClient);
+                        System.out.println("Nouveau Client :"+joueur.getLogin()+", adresse :"+joueur.getSocketRemoteAdress());
+                        this.nbJoueurs++;
+                        break;
 //
 //                    case 1:
 //                        // Demande d'équipe
@@ -54,9 +63,8 @@ public class Server {
                         socketClient = serverSocket.accept();
                         new ServGuest(socketClient).start();
                         this.socketsClient.add(socketClient);
-                        System.out.println(socketsClient.toString());
+                        System.out.println("Nouveau Client :"+socketClient.getRemoteSocketAddress());
                         this.nbJoueurs++;
-                        break;
                 }
             }
 

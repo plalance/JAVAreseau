@@ -12,6 +12,9 @@ public class Joueur{
     private String message;
     private Socket socket;
     private BufferedReader reponse;
+    private String socketRemoteAdress;
+
+    private String login;
 
     public void createSocket() {
 
@@ -74,8 +77,21 @@ public class Joueur{
     public Socket getSocket() {
         return socket;
     }
-
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public String getSocketRemoteAdress() {
+        return socketRemoteAdress;
+    }
+    public void setSocketRemoteAdress(String socketRemoteAdress) {
+        this.socketRemoteAdress = socketRemoteAdress;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
