@@ -28,10 +28,14 @@ public class ServGuest extends Thread {
                     new InputStreamReader(socket.getInputStream()));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-                writer.println("SERVEUR : Vous avez envoyé :"+line);
-                writer.flush();
+                if(line.equals("deco")){
+                    disconnectRequest();
+                }else {
+                    System.out.println(line);
+                    PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+                    writer.println("SERVEUR : Vous avez envoyé :"+line);
+                    writer.flush();
+                }
             }
 
         } catch (IOException e) {
@@ -50,5 +54,9 @@ public class ServGuest extends Thread {
     }
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
+    }
+
+    public void disconnectRequest(){
+        Server.server.removeFromVector(this.joueur.getSocket());
     }
 }

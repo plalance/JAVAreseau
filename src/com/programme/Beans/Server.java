@@ -14,6 +14,9 @@ public class Server {
     private Integer nbAmirals = 0;
     private Vector<Socket> socketsClient;
 
+    static Server server;
+
+
     public Server(Integer port){
         this.port = port;
     }
@@ -42,7 +45,7 @@ public class Server {
                         servGuest = new ServGuest(socketClient);
                         servGuest.setJoueur(joueur);
                         servGuest.start();
-                        
+
                         this.socketsClient.add(socketClient);
                         System.out.println("Nouveau Client, adresse :"+joueur.getSocketRemoteAdress());
                         this.nbJoueurs++;
@@ -103,8 +106,9 @@ public class Server {
         return socketsClient;
     }
 
-    public void setSocketsClient(Vector<Socket> socketsClient) {
-        this.socketsClient = socketsClient;
+    public void removeFromVector(Socket socketaretirer){
+        this.socketsClient.remove(socketaretirer);
     }
+
 
 }
