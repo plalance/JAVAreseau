@@ -15,6 +15,7 @@ public class ServGuest extends Thread {
     private final Socket socket;
     private PrintWriter reponse;
     private Joueur joueur;
+    private Boolean etat;
 
     public ServGuest(Socket socket) { //constructeur
         super();
@@ -22,24 +23,28 @@ public class ServGuest extends Thread {
     }
 
     public void run() {
+        this.etat = true;
         BufferedReader reader;
-        try {
-            reader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                if(line.equals("deco")){
-                    disconnectRequest();
-                }else {
-                    System.out.println(line);
-                    PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-                    writer.println("SERVEUR : Vous avez envoyé :"+line);
-                    writer.flush();
+        while(this.etat){
+            try {
+                reader = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    if(line.equals("deco")){
+                        disconnectRequest();
+                        this.etat = false;
+                    }else {
+                        System.out.println(line);
+                        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+                        writer.println("SERVEUR : Vous avez envoyé :"+line);
+                        writer.flush();
+                    }
                 }
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         System.out.println("Connexion terminée !");
