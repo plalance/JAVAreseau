@@ -23,7 +23,7 @@ public class Controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.joueur.setMessage(field.getText());
-        this.joueur.causer(this.joueur.getMessage());
+        this.joueur.envoiPaquet("causer");
     }
 
     public Joueur getJoueur() {

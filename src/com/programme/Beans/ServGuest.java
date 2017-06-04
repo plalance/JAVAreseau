@@ -1,5 +1,9 @@
 package com.programme.Beans;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,6 +21,7 @@ public class ServGuest extends Thread {
     private Joueur joueur;
     private Boolean etat;
     private Server server;
+    private JSONObject json;
 
     public ServGuest(Socket socket, Server server) { //constructeur
         super();
@@ -24,6 +29,7 @@ public class ServGuest extends Thread {
         this.server = server;
     }
 
+    @SuppressWarnings("Duplicates")
     public void run() {
         this.etat = true;
         BufferedReader reader;
@@ -33,21 +39,28 @@ public class ServGuest extends Thread {
                         new InputStreamReader(socket.getInputStream()));
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-                    if(line.equals("deco")){
-                        this.server.removeFromVector(this.joueur.getSocketRemoteAdress());
-//                        disconnectRequest();
-//                        System.out.println(this.server.getPort());
-//                        System.out.println(this.getJoueur().getSocketRemoteAdress());
-                        this.etat = false;
-                    }else {
-                        System.out.println(line);
-                        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-                        writer.println("SERVEUR : Vous avez envoyé :"+line);
-                        writer.flush();
-                    }
+//                    if(line.equals("deco")){
+//                        this.server.removeFromVector(this.joueur.getSocketRemoteAdress());
+////                        disconnectRequest();
+////                        System.out.println(this.server.getPort());
+////                        System.out.println(this.getJoueur().getSocketRemoteAdress());
+//                        this.etat = false;
+//                    }else {
+//                        System.out.println(line);
+//                        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+//                        writer.println("SERVEUR : Vous avez envoyé :"+line);
+//                        writer.flush();
+//                    }
+
+                    JSONParser jsonParser = new JSONParser();
+                    JSONObject jsonObject = (JSONObject) jsonParser.parse(line);
+                    json = jsonObject;
+                    decode();
                 }
 
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
@@ -55,8 +68,30 @@ public class ServGuest extends Thread {
         System.out.println("Connexion terminée !");
     }
 
-    public void excludeGamer() throws IOException {
-        socket.close();
+    public void decode() throws IOException {
+        String action = (String) json.get("action");
+        System.out.println("L'action est " + action);
+        switch (action){
+            case "deco":
+                decoJoueurAction();
+                break;
+            case "causer":
+                afficherMsgAction();
+        }
+    }
+
+    private void decoJoueurAction(){
+        this.server.removeFromVector(this.joueur.getSocketRemoteAdress());
+        System.out.println(this.server.getPort());
+        System.out.println(this.getJoueur().getSocketRemoteAdress());
+        this.etat = false;
+    }
+
+    private void afficherMsgAction() throws IOException {
+        String contenu = (String) json.get("contenu");
+        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+        writer.println("SERVEUR : Vous avez envoyé :"+contenu);
+        writer.flush();
     }
 
     public Joueur getJoueur() {
@@ -69,6 +104,5 @@ public class ServGuest extends Thread {
 //    public void disconnectRequest(){
 //        this.server.removeFromVector(this.joueur.getSocket());
 //    }
-
 
 }

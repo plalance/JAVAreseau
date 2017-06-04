@@ -1,9 +1,8 @@
 package com.programme.Beans;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import org.json.simple.JSONObject;
+
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -19,7 +18,10 @@ public class Joueur{
     public void createSocket() {
 
         try {
-            socket = new Socket("192.168.43.33", 6969);
+            // IP Thibal Fever
+//            socket = new Socket("192.168.43.33", 6969);
+            // Ip Thibal Maison
+            socket = new Socket("192.168.0.16", 6969);
             socket.setKeepAlive(true);
             // simulation d'attente
 //            socket.setKeepAlive(true);
@@ -31,17 +33,6 @@ public class Joueur{
         }
     }
 
-//    public void deconnexion(){
-//        try {
-//            socket.close();
-//            System.out.print("Je suis déconnecté...");
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void setMessage(String message) {
         this.message = message;
         System.out.println("Message a envoyer :"+message);
@@ -50,10 +41,19 @@ public class Joueur{
         return message;
     }
 
-    public void causer(String message){
+    public void envoiPaquet(String action){
         try {
+            JSONObject obj = new JSONObject();
+            obj.put("action", action);
+            obj.put("contenu", this.message);
+            obj.put("login", this.login);
+            StringWriter out = new StringWriter();
+            obj.writeJSONString(out);
+            String paquet = out.toString();
+            System.out.println("Vous envoyez : "+paquet);
+
             PrintWriter writer = new PrintWriter(this.getSocket().getOutputStream());
-            writer.print(message+"\n");
+            writer.print(paquet+"\n");
             writer.flush();
 
             this.reponse = new BufferedReader(
@@ -68,6 +68,7 @@ public class Joueur{
     }
     public void deconnexion(){
         try {
+            envoiPaquet("deco");
             this.getSocket().close();
         } catch (IOException e) {
             e.printStackTrace();
