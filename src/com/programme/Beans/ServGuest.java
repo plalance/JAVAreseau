@@ -78,7 +78,7 @@ public class ServGuest extends Thread {
             case "causer":
                 afficherMsgAction();
                 break;
-            case "loginAction":
+            case "sendLogin":
                 afficherLoginAction();
         }
     }
@@ -100,7 +100,7 @@ public class ServGuest extends Thread {
 
     private void afficherLoginAction() throws IOException {
         String login = (String) json.get("login");
-        System.out.println("Le login est"+login+"\n");
+        System.out.println("Le login est "+login+"\n");
         PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
         writer.println("SERVEUR : Bienvenue :"+login);
         writer.flush();
