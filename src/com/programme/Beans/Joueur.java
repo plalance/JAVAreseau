@@ -75,16 +75,12 @@ public class Joueur{
         }
     }
 
-    public void sendLogin(String login){
-        String json = login;
+    public void sendLogin(){
         try {
-            PrintWriter writer = new PrintWriter(this.getSocket().getOutputStream());
-            writer.println("Voici mon login :"+json+"\n");
-            writer.flush();
-        } catch (UnknownHostException e) {
+            envoiPaquet("sendLogin");
+            this.getSocket().close();
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (IOException ioe){
-            ioe.printStackTrace();
         }
     }
 

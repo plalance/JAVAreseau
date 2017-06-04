@@ -21,7 +21,8 @@ public class LoginController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.joueur.sendLogin(field.getText());
+        this.joueur.setLogin(field.getText());
+        this.joueur.sendLogin();
     }
 
     public Joueur getJoueur() {
