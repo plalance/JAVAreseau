@@ -39,19 +39,6 @@ public class ServGuest extends Thread {
                         new InputStreamReader(socket.getInputStream()));
                 String line = "";
                 while ((line = reader.readLine()) != null) {
-//                    if(line.equals("deco")){
-//                        this.server.removeFromVector(this.joueur.getSocketRemoteAdress());
-////                        disconnectRequest();
-////                        System.out.println(this.server.getPort());
-////                        System.out.println(this.getJoueur().getSocketRemoteAdress());
-//                        this.etat = false;
-//                    }else {
-//                        System.out.println(line);
-//                        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-//                        writer.println("SERVEUR : Vous avez envoyé :"+line);
-//                        writer.flush();
-//                    }
-
                     JSONParser jsonParser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(line);
                     json = jsonObject;
