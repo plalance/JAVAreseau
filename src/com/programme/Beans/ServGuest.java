@@ -95,6 +95,7 @@ public class ServGuest extends Thread {
     private void afficherLoginAction() throws IOException {
         String login = (String) json.get("login");
         System.out.println("Le login est "+login+"\n");
+        this.joueur.setLogin(login);
         PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
         writer.println("SERVEUR : Bienvenue :"+login);
         writer.flush();
@@ -108,7 +109,7 @@ public class ServGuest extends Thread {
     private void setTeamAction() throws IOException {
         this.joueur.setTeam((String) json.get("team"));
         PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
-        writer.println(this.joueur.getLogin()+"Vous êtes dans l'éauipe : "+this.joueur.getTeam());
+        writer.println(this.joueur.getLogin()+" Vous êtes dans l'équipe : "+this.joueur.getTeam());
         writer.flush();
 
     }
