@@ -12,6 +12,7 @@ public class Joueur{
     private Socket socket;
     private BufferedReader reponse;
     private String socketRemoteAdress;
+    private String team;
 
     private String login;
 
@@ -45,8 +46,23 @@ public class Joueur{
         try {
             JSONObject obj = new JSONObject();
             obj.put("action", action);
-            obj.put("contenu", this.message);
-            obj.put("login", this.login);
+            switch (action){
+                case "login":
+                    obj.put("login", this.login);
+                    break;
+                case "causer":
+                    obj.put("contenu", this.message);
+                    break;
+                case "choseTeam":
+                    obj.put("team", this.team);
+                    break;
+                case "fire":
+                    obj.put("X", 1);
+                    obj.put("Y", 1);
+                    break;
+            }
+
+
             StringWriter out = new StringWriter();
             obj.writeJSONString(out);
             String paquet = out.toString();
@@ -75,6 +91,10 @@ public class Joueur{
         }
     }
 
+    public void choseTeam(){
+        envoiPaquet("choseTeam");
+    }
+
     public void sendLogin(){
         envoiPaquet("sendLogin");
     }
@@ -98,5 +118,12 @@ public class Joueur{
     }
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+    public void setTeam(String team) {
+        this.team = team;
     }
 }
