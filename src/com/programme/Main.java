@@ -4,6 +4,7 @@ import com.programme.Beans.Joueur;
 import com.programme.Controller.Controller;
 import com.programme.Controller.DeconnexionController;
 import com.programme.Controller.LoginController;
+import com.programme.Views.GridView;
 import com.programme.Views.View;
 
 /**
@@ -14,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
         Joueur joueur = new Joueur();
 
-        View vue = new View();
+        GridView vue = new GridView();
+//        View vue = new View();
         vue.init();
         Controller controller = new Controller(joueur,vue.getField());
         DeconnexionController decoController = new DeconnexionController(joueur,vue.getField());

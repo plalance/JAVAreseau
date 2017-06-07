@@ -11,19 +11,26 @@ import java.awt.GridLayout;
  */
 public class GridView extends JFrame {
     JPanel p = new JPanel();
+    JPanel underPanel = new JPanel();
     GridCase buttons[] = new GridCase[100];
+
+    JTextField field;
+    JTextField loginField;
+    JButton button;
+    JButton loginButton;
+    JButton buttonDeconnexion;
 
     public GridView() {
         super("Grille de jeu");
     }
 
     public void init() {
-        setSize(500, 500);
+        setSize(800, 400);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new GridLayout(1,2));
 
         p.setLayout(new GridLayout(10, 10));
-
         for (int line = 1; line < 11; line++) {
             for (int col = 1; col < 11; col++) {
                 buttons[line*col-1] = new GridCase();
@@ -33,6 +40,44 @@ public class GridView extends JFrame {
             }
         }
         add(p);
+
+
+        underPanel.setLayout(new GridLayout(5,2));
+        field = new JTextField();
+        field.setColumns(10);
+        loginField = new JTextField();
+        loginField.setColumns(10);
+        button = new JButton("Envoyer");
+        loginButton = new JButton("Envoyer mon login");
+        buttonDeconnexion = new JButton("Se déconnecter");
+
+        underPanel.add(loginField);
+        underPanel.add(loginButton);
+        underPanel.add(field);
+        underPanel.add(button);
+        underPanel.add(buttonDeconnexion);
+        add(underPanel);
         setVisible(true);
+    }
+
+
+    public JButton getButtonDeconnexion() {
+        return buttonDeconnexion;
+    }
+
+    public JTextField getField() {
+        return field;
+    }
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public JTextField getLoginField() {
+        return loginField;
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
     }
 }

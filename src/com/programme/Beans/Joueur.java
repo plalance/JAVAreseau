@@ -19,9 +19,9 @@ public class Joueur{
 
         try {
             // IP Thibal Fever
-//            socket = new Socket("192.168.43.33", 6969);
+            socket = new Socket("192.168.43.33", 6969);
             // Ip Thibal Maison
-            socket = new Socket("192.168.0.16", 6969);
+//            socket = new Socket("192.168.0.16", 6969);
             socket.setKeepAlive(true);
             // simulation d'attente
 //            socket.setKeepAlive(true);
@@ -53,7 +53,7 @@ public class Joueur{
             System.out.println("Vous envoyez : "+paquet);
 
             PrintWriter writer = new PrintWriter(this.getSocket().getOutputStream());
-            writer.print(paquet+"\n");
+            writer.println(paquet);
             writer.flush();
 
             this.reponse = new BufferedReader(
@@ -76,12 +76,7 @@ public class Joueur{
     }
 
     public void sendLogin(){
-        try {
-            envoiPaquet("sendLogin");
-            this.getSocket().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        envoiPaquet("sendLogin");
     }
 
     public Socket getSocket() {
