@@ -1,6 +1,7 @@
 package com.programme.Controller;
 
 import com.programme.Beans.Joueur;
+import com.programme.Views.GridView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +14,13 @@ public class Controller implements ActionListener{
 
     Joueur joueur;
     JTextField field;
+    GridView vue;
 
-    public Controller(Joueur joueur, JTextField field){
+    public Controller(Joueur joueur, GridView vue){
         this.joueur = joueur;
-        this.field = field;
+        this.field = vue.getField();
         this.joueur.createSocket();
+        this.vue = vue;
     }
 
     @Override

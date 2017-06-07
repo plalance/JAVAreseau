@@ -47,13 +47,13 @@ public class Joueur{
             JSONObject obj = new JSONObject();
             obj.put("action", action);
             switch (action){
-                case "login":
+                case "sendLogin":
                     obj.put("login", this.login);
                     break;
                 case "causer":
                     obj.put("contenu", this.message);
                     break;
-                case "choseTeam":
+                case "chooseTeam":
                     obj.put("team", this.team);
                     break;
                 case "fire":
@@ -92,7 +92,7 @@ public class Joueur{
     }
 
     public void choseTeam(){
-        envoiPaquet("choseTeam");
+        envoiPaquet("chooseTeam");
     }
 
     public void sendLogin(){

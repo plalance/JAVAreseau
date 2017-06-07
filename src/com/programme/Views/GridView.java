@@ -19,6 +19,8 @@ public class GridView extends JFrame {
     JButton button;
     JButton loginButton;
     JButton buttonDeconnexion;
+    JButton boutonA;
+    JButton boutonB;
 
     public GridView() {
         super("Grille de jeu");
@@ -42,6 +44,8 @@ public class GridView extends JFrame {
         add(p);
 
 
+        boutonA = new JButton("A");
+        boutonB = new JButton("B");
         underPanel.setLayout(new GridLayout(5,2));
         field = new JTextField();
         field.setColumns(10);
@@ -51,6 +55,8 @@ public class GridView extends JFrame {
         loginButton = new JButton("Envoyer mon login");
         buttonDeconnexion = new JButton("Se déconnecter");
 
+        underPanel.add(boutonA);
+        underPanel.add(boutonB);
         underPanel.add(loginField);
         underPanel.add(loginButton);
         underPanel.add(field);
@@ -79,5 +85,12 @@ public class GridView extends JFrame {
 
     public JButton getLoginButton() {
         return loginButton;
+    }
+
+    public JButton getBoutonA() {
+        return boutonA;
+    }
+    public JButton getBoutonB() {
+        return boutonB;
     }
 }

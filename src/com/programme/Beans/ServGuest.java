@@ -105,7 +105,7 @@ public class ServGuest extends Thread {
         System.out.println("Les coordonées de tir sont : "+tir+"\n");
     }
 
-    private void setTeamAction() {
+    private void setTeamAction() throws IOException {
         this.joueur.setTeam((String) json.get("team"));
         PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
         writer.println(this.joueur.getLogin()+"Vous êtes dans l'éauipe : "+this.joueur.getTeam());
