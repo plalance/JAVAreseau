@@ -23,10 +23,6 @@ public class Controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.joueur.setMessage(field.getText());
-        if (!this.joueur.getLogin().equals(null)){
-            this.joueur.setLogin("Anonyme");
-        }
-        this.joueur.setLogin(field.getText());
         this.joueur.envoiPaquet("causer");
     }
 

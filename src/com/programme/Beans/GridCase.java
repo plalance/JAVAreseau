@@ -29,6 +29,7 @@ public class GridCase extends JButton implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         System.out.println("Je suis une case et voila ma position : Ligne "+this.positionY+", Colonne "+this.positionX);
+
         value++;
         // If more than 3.. --> go back to zero
         value%=3;
