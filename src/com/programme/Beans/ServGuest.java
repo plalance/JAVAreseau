@@ -67,6 +67,10 @@ public class ServGuest extends Thread {
                 break;
             case "sendLogin":
                 afficherLoginAction();
+                break;
+            case "fire":
+                fireAction();
+                break;
         }
     }
 
@@ -91,6 +95,10 @@ public class ServGuest extends Thread {
         PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
         writer.println("SERVEUR : Bienvenue :"+login);
         writer.flush();
+    }
+    private void fireAction() {
+        String tir = (String) json.get("tir");
+        System.out.println("Les coordonées de tir sont : "+tir+"\n");
     }
 
     public Joueur getJoueur() {

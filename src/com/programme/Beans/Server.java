@@ -13,6 +13,7 @@ public class Server {
     private Integer nbJoueurs = 0;
     private Integer nbAmirals = 0;
     private Vector<Socket> socketsClient;
+    private Vector<ServGuest> servguests;
 
 
     public Server(Integer port){
