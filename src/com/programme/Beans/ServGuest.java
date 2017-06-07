@@ -71,6 +71,9 @@ public class ServGuest extends Thread {
             case "fire":
                 fireAction();
                 break;
+            case "chooseTeam":
+                setTeamAction();
+                break;
         }
     }
 
@@ -96,9 +99,18 @@ public class ServGuest extends Thread {
         writer.println("SERVEUR : Bienvenue :"+login);
         writer.flush();
     }
+
     private void fireAction() {
         String tir = (String) json.get("tir");
         System.out.println("Les coordonées de tir sont : "+tir+"\n");
+    }
+
+    private void setTeamAction() {
+        this.joueur.setTeam((String) json.get("team"));
+        PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+        writer.println(this.joueur.getLogin()+"Vous êtes dans l'éauipe : "+this.joueur.getTeam());
+        writer.flush();
+
     }
 
     public Joueur getJoueur() {
